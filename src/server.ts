@@ -14,6 +14,7 @@ import config from '@/config';
 import router from '@/routes/v1';
 import corsOptions from '@/lib/cors';
 import { logger } from '@/lib/winston';
+import { connectDatabase, disconnectDatabase } from '@/lib/mongoose';
 
 const server = express();
 
@@ -54,7 +55,9 @@ server.use(compression());
 
 (async function (): Promise<void> {
   try {
-    server.use('/', router);
+    await connectDatabase();
+
+    server.use('/api/v1/', router);
 
     server.listen(config.PORT, () => {
       logger.info(`Server listening at http://localhost:${config.PORT}`);
@@ -69,6 +72,7 @@ server.use(compression());
 
 const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
   try {
+    await disconnectDatabase();
     logger.info('Server shutdown', signal);
     process.exit(0);
   } catch (error) {
@@ -77,4 +81,4 @@ const serverTermination = async (signal: NodeJS.Signals): Promise<void> => {
 };
 
 process.on('SIGTERM', serverTermination);
-process.on('SIGNINT', serverTermination);
+process.on('SIGINT', serverTermination);

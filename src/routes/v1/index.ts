@@ -3,6 +3,11 @@
  */
 import { Router } from 'express';
 
+/**
+ * Routers
+ */
+import authRouter from './auth';
+
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -13,5 +18,7 @@ router.get('/', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+router.use('/auth', authRouter);
 
 export default router;
