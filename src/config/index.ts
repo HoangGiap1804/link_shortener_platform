@@ -27,9 +27,14 @@ const config = {
   WHITELISTED_EMAILS: process.env.WHITELISTED_EMAILS?.split(','),
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET!,
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET!,
+  JWT_PASSWORD_RESET_SECRET: process.env.JWT_PASSWORD_RESET_SECRET!,
   ACCESS_TOKEN_EXPIRY: process.env.ACCESS_TOKEN_EXPIRY as ms.StringValue,
   REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY as ms.StringValue,
+  PASSWORD_RESET_EXPIRY: process.env.PASSWORD_RESET_EXPIRY as ms.StringValue,
+  SENDER_EMAIL: process.env.SENDER_EMAIL!,
+  PASSWORD_EMAIL: process.env.PASSWORD_EMAIL!,
   COOKIE_MAX_AGE: _7d_IN_MILLISECOND,
+  CLIENT_ORIGIN: process.env.CLIENT_ORIGIN!,
 };
 
 export default config;

@@ -69,7 +69,6 @@ const authResgister = async (req: Request, res: Response): Promise<void> => {
       user: {
         _id: user._id,
         email: user.email,
-        passwordResetToken: user.passwordResetToken,
         role: user.role,
       },
       accessToken,
